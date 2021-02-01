@@ -34,10 +34,10 @@ class Grid:
         for r in range(self.rows):
             for c in range(self.columns):
                 cell = self.grid[r][c]
-                neighbours = self.get_num_live_neighbours(r, c)
-                if cell == 0 and neighbours == 3:
+                num_live_neighbours = self.get_num_live_neighbours(r, c)
+                if cell == 0 and num_live_neighbours == 3:
                     next_gen[r][c] = 1
-                elif cell == 1 and (neighbours < 2 or neighbours > 3):
+                elif cell == 1 and (num_live_neighbours < 2 or num_live_neighbours > 3):
                     next_gen[r][c] = 0
                 else:
                     next_gen[r][c] = cell
@@ -60,6 +60,15 @@ def main():
     offset = 1
     dead_colour = (50, 50, 50)
     alive_colour = (20, 250, 250)
+
+    while True:
+        print("Choose colour scheme 1 or 2: ", end="")
+        colour_scheme = input()
+        if colour_scheme == "2":
+            alive_colour = (150, 50, 50)
+            break
+        elif colour_scheme == "1":
+            break
 
     grid = Grid(width, height, scale, offset, dead_colour, alive_colour)
     grid.create_random_grid()
